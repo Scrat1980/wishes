@@ -2,14 +2,14 @@
 
 namespace app\controllers;
 
-use models\RegistrationForm;
+use app\models\RegistrationForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use models\ContactForm;
+use app\models\ContactForm;
 
 class SiteController extends Controller
 {
@@ -62,13 +62,6 @@ class SiteController extends Controller
     public function actionIndex()
     {
 //        return $this->redirect(['site/login']);
-
-//        echo '<pre>';
-//        var_dump(
-//            Yii::$app->user
-//        );
-//        echo '</pre>';
-//        die;
 
         return $this->render('index');
     }

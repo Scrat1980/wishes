@@ -30,8 +30,6 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <?php $this->beginBody() ?>
 
 <header id="header">
-    <?php var_dump(Yii::$app->user) ?>
-    <?php var_dump(Yii::$app->user->isGuest) ?>
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,

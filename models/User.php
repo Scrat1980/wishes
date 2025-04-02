@@ -38,14 +38,22 @@ class User extends BaseObject implements IdentityInterface
 
     private static function getUsers(): void
     {
-        self::$users = UserRecord::find()->asArray()->all();
-        foreach (self::$users as $key => $user) {
-            self::$users[$key]['authKey'] = $user['auth_key'];
-            unset(self::$users[$key]['auth_key']);
-            self::$users[$key]['accessToken'] = $user['access_token'];
-            unset(self::$users[$key]['access_token']);
-            self::$users[$key]['email'] = $user['email'] ?? '';
+
+        $users = UserRecord::find()->asArray()->all();
+        foreach ($users as $key => $user) {
+            self::$users[$user['id']] = $user;
+            self::$users[$user['id']]['authKey'] = $user['auth_key'];
+            unset(self::$users[$user['id']]['auth_key']);
+            self::$users[$user['id']]['accessToken'] = $user['access_token'];
+            unset(self::$users[$user['id']]['access_token']);
+            self::$users[$user['id']]['email'] = $user['email'] ?? '';
         }
+
+//        echo '<pre>';
+//        var_dump(self::$users);
+//        echo '</pre>';
+//        die;
+
     }
 
     public static function findIdentity($id)
