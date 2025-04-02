@@ -103,7 +103,7 @@ class SiteController extends Controller
         $model = new RegistrationForm();
         if (
             $model->load(Yii::$app->request->post())
-            && $model->login()
+            && $model->register()
         ) {
             return $this->goBack();
         }

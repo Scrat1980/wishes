@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\records\UserRecord;
 use Yii;
 use yii\base\Model;
 
@@ -13,9 +14,9 @@ use yii\base\Model;
  */
 class RegistrationForm extends Model
 {
-    public $username;
-    public $email;
-    public $password;
+    public string $username;
+    public string $email;
+    public string $password;
 
     private bool $_user = false;
 
@@ -28,8 +29,18 @@ class RegistrationForm extends Model
         ];
     }
 
-    public function register()
+    public function register(): bool
     {
+        $user = new UserRecord();
+        $user->username =
+        echo '<pre>';
+        var_dump(
+            $this->attributes
+        );
+        echo '</pre>';
+        die;
+
+        return true;
     }
 
 }
