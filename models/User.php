@@ -19,22 +19,7 @@ class User extends BaseObject implements IdentityInterface
     /**
      * @var string[]
      */
-    private static array $users = [
-//        '100' => [
-//            'id' => '100',
-//            'username' => 'admin',
-//            'password' => 'admin',
-//            'authKey' => 'test100key',
-//            'accessToken' => '100-token',
-//        ],
-//        '101' => [
-//            'id' => '101',
-//            'username' => 'demo',
-//            'password' => 'demo',
-//            'authKey' => 'test101key',
-//            'accessToken' => '101-token',
-//        ],
-    ];
+    private static array $users = [];
 
     private static function getUsers(): void
     {
@@ -48,11 +33,6 @@ class User extends BaseObject implements IdentityInterface
             unset(self::$users[$user['id']]['access_token']);
             self::$users[$user['id']]['email'] = $user['email'] ?? '';
         }
-
-//        echo '<pre>';
-//        var_dump(self::$users);
-//        echo '</pre>';
-//        die;
 
     }
 
