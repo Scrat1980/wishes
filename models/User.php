@@ -15,6 +15,7 @@ class User extends BaseObject implements IdentityInterface
     public string $authKey;
     public string $accessToken;
     public string $email;
+    public string|null $avatar_path;
 
     /**
      * @var string[]
@@ -25,7 +26,7 @@ class User extends BaseObject implements IdentityInterface
     {
 
         $users = UserRecord::find()->asArray()->all();
-        foreach ($users as $key => $user) {
+        foreach ($users as $user) {
             self::$users[$user['id']] = $user;
             self::$users[$user['id']]['authKey'] = $user['auth_key'];
             unset(self::$users[$user['id']]['auth_key']);

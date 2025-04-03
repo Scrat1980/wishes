@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\RegistrationForm;
 use app\models\UploadForm;
+use app\records\UserRecord;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -141,6 +142,17 @@ class SiteController extends Controller
             }
         }
 
-        return $this->render('upload', ['model' => $model]);
+        try {
+            $userId = \Yii::$app->getUser()->getId();
+            $userRecord = UserRecord::findOne(['id' => $userId]);
+            $avatarPath = $userRecord->avatar_path;
+        } catch (\Exception) {
+            $avatarPath = '';
+        }
+
+        return $this->render('upload', compact(
+            'model',
+            'avatarPath'
+        ));
     }
 }
