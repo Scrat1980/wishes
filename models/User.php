@@ -108,6 +108,6 @@ class User extends BaseObject implements IdentityInterface
      */
     public function validatePassword(string $password): bool
     {
-        return $this->password === $password;
+        return $this->password === sha1($password);
     }
 }

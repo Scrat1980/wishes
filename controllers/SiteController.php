@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\RegistrationForm;
+use app\models\UploadForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -10,6 +11,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\web\UploadedFile;
 
 class SiteController extends Controller
 {
@@ -62,7 +64,6 @@ class SiteController extends Controller
     public function actionIndex()
     {
 //        return $this->redirect(['site/login']);
-
         return $this->render('index');
     }
 
@@ -103,8 +104,10 @@ class SiteController extends Controller
         $model = new RegistrationForm();
         if (
             $model->load(Yii::$app->request->post())
-            && $model->register()
+            && $model->validate()
         ) {
+            $model->register();
+
             return $this->goBack();
         }
 
@@ -126,31 +129,18 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
+    public function actionUpload()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
+        $model = new UploadForm();
 
-            return $this->refresh();
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->upload()) {
+                // file is uploaded successfully
+//                return;
+            }
         }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
+        return $this->render('upload', ['model' => $model]);
     }
 }
