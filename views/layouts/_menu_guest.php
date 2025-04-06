@@ -1,6 +1,6 @@
 <?php
 
 return [
-        ['label' => 'Registration', 'url' => ['/site/register']],
-        ['label' => 'Login', 'url' => ['/site/login']],
+        ['label' => 'Sign up', 'url' => ['/site/register']],
+        ['label' => 'Sign in', 'url' => ['/site/login']],
 ];
