@@ -8,7 +8,8 @@ use yii\web\UploadedFile;
 
 class UploadForm extends Model
 {
-    public UploadedFile | null $imageFile = null;
+    public UploadedFile|null $imageFile = null;
+    public string|null $username = null;
 
     public function rules(): array
     {
@@ -18,6 +19,10 @@ class UploadForm extends Model
                 'file',
                 'skipOnEmpty' => false,
                 'extensions' => 'png, jpg, jpeg',
+            ],
+            [
+                ['username'],
+                'safe',
             ],
         ];
     }
