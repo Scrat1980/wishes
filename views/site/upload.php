@@ -13,7 +13,18 @@ use yii\imagine\Image;
 <div class="col-lg-6 float-start">
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
     <section>
-        <?= $form->field($model, 'imageFile')->fileInput() ?>
+        <?=
+            $form->field(
+                $model,
+                'imageFile',
+                [
+                    'errorOptions' => ['tag' => null],
+                ],
+
+            )
+            ->fileInput()
+            ->label(false)
+        ?>
         <?= $form->field($model, 'username')->textInput() ?>
 
     </section>
@@ -28,3 +39,4 @@ use yii\imagine\Image;
         style="height: 30vh; width: 30vh; border-radius: 500px"
     >
 </div>
+<?= $this->render('_register_js.php') ?>
