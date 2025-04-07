@@ -10,6 +10,8 @@ class UploadForm extends Model
 {
     public UploadedFile|null $imageFile = null;
     public string|null $username = null;
+    public string|null $email = null;
+//    public string|null $password = null;
 
     public function rules(): array
     {
@@ -17,11 +19,11 @@ class UploadForm extends Model
             [
                 ['imageFile'],
                 'file',
-                'skipOnEmpty' => false,
+                'skipOnEmpty' => true,
                 'extensions' => 'png, jpg, jpeg',
             ],
             [
-                ['username'],
+                ['username', 'email'],
                 'safe',
             ],
         ];
@@ -29,9 +31,15 @@ class UploadForm extends Model
 
     public function upload(): bool
     {
-        if ($this->validate()) {
+        if (!$this->validate()) {
+            return false;
+        }
+
+        $userId = \Yii::$app->getUser()->getId();
+        $userRecord = UserRecord::findOne(['id' => $userId]);
+
+        if ($this->imageFile) {
             $filePath = '../web/img/';
-//            $filePath = '../runtime/uploads/'
             $fileName =
                 $this->imageFile->baseName .'_' . round(microtime(true))
                 . '.' . $this->imageFile->extension
@@ -40,16 +48,17 @@ class UploadForm extends Model
             $this->imageFile->saveAs($filePath);
             chmod($filePath, 0777);
 
-            $userId = \Yii::$app->getUser()->getId();
-
-
-            $userRecord = UserRecord::findOne(['id' => $userId]);
             $userRecord->avatar_path = '/img/' . $fileName;
-            $userRecord->save();
-
-            return true;
-        } else {
-            return false;
         }
+        if ($this->username) {
+            $userRecord->username = $this->username;
+        }
+        if ($this->email) {
+            $userRecord->email = $this->email;
+        }
+
+        $userRecord->save();
+
+        return true;
     }
 }

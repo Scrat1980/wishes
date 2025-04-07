@@ -2,6 +2,7 @@
 /**
  * @var $model
  * @var $avatarPath
+ * @var $username
  */
 
 use yii\widgets\ActiveForm;
@@ -17,15 +18,13 @@ use yii\imagine\Image;
             $form->field(
                 $model,
                 'imageFile',
-                [
-                    'errorOptions' => ['tag' => null],
-                ],
-
+                ['errorOptions' => ['tag' => null],],
             )
             ->fileInput()
             ->label(false)
         ?>
         <?= $form->field($model, 'username')->textInput() ?>
+        <?= $form->field($model, 'email')->textInput() ?>
 
     </section>
         <button class="btn btn-primary">Submit</button>
@@ -38,5 +37,6 @@ use yii\imagine\Image;
         alt="<?= $avatarPath ?>"
         style="height: 30vh; width: 30vh; border-radius: 500px"
     >
+    <h3><?= $username ?></h3>
 </div>
 <?= $this->render('_register_js.php') ?>

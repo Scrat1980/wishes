@@ -135,24 +135,26 @@ class SiteController extends Controller
         $model = new UploadForm();
 
         if (Yii::$app->request->isPost) {
+//            $model->username = Yii::$app->request->post()['UploadForm']['username'] ?? null;
+//            $model->email = Yii::$app->request->post()['UploadForm']['email'] ?? null;
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            if ($model->upload()) {
-                // file is uploaded successfully
-//                return;
-            }
+            $model->upload();
         }
 
         try {
             $userId = \Yii::$app->getUser()->getId();
             $userRecord = UserRecord::findOne(['id' => $userId]);
             $avatarPath = $userRecord->avatar_path;
+            $username = $userRecord->username;
         } catch (\Exception) {
             $avatarPath = '';
+            $username = '';
         }
 
         return $this->render('upload', compact(
             'model',
-            'avatarPath'
+            'avatarPath',
+            'username'
         ));
     }
 }
