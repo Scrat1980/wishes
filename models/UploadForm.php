@@ -29,9 +29,18 @@ class UploadForm extends Model
 
     public function upload(): bool
     {
-        if ($this->validate()) {
+        if (!$this->validate()) {
+            return false;
+        }
+
+        $userId = \Yii::$app->getUser()->getId();
+        $userRecord = UserRecord::findOne(['id' => $userId]);
+        if ($this->username) {
+            $userRecord->username = $this->username;
+        }
+
+        if ($this->imageFile) {
             $filePath = '../web/img/';
-//            $filePath = '../runtime/uploads/'
             $fileName =
                 $this->imageFile->baseName .'_' . round(microtime(true))
                 . '.' . $this->imageFile->extension
@@ -40,16 +49,11 @@ class UploadForm extends Model
             $this->imageFile->saveAs($filePath);
             chmod($filePath, 0777);
 
-            $userId = \Yii::$app->getUser()->getId();
-
-
-            $userRecord = UserRecord::findOne(['id' => $userId]);
             $userRecord->avatar_path = '/img/' . $fileName;
-            $userRecord->save();
-
-            return true;
-        } else {
-            return false;
         }
+
+        $userRecord->save();
+
+        return true;
     }
 }

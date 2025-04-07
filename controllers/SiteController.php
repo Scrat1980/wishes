@@ -136,10 +136,12 @@ class SiteController extends Controller
 
         if (Yii::$app->request->isPost) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            if ($model->upload()) {
-                // file is uploaded successfully
-//                return;
+            if (
+                Yii::$app->request->post('UploadForm')['username']
+            ) {
+                $model->username = Yii::$app->request->post('UploadForm')['username'];
             }
+            $model->upload();
         }
 
         try {
