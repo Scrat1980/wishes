@@ -23,6 +23,6 @@ use yii\imagine\Image;
     <img
         src="<?= $avatarPath ?>"
         alt="<?= $avatarPath ?>"
-        style="height: 200px; width: 200px; border-radius: 500px"
+        style="height: 30vh; width: 30vh; border-radius: 500px"
     >
 </div>
