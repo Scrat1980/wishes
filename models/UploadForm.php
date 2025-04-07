@@ -25,10 +25,13 @@ class UploadForm extends Model
     public function upload(): bool
     {
         if ($this->validate()) {
-            $filePath = '../runtime/uploads/'
-                . $this->imageFile->baseName .'_' . round(microtime(true))
+            $filePath = '../web/img/';
+//            $filePath = '../runtime/uploads/'
+            $fileName =
+                $this->imageFile->baseName .'_' . round(microtime(true))
                 . '.' . $this->imageFile->extension
             ;
+            $filePath .= $fileName;
             $this->imageFile->saveAs($filePath);
             chmod($filePath, 0777);
 
@@ -36,7 +39,7 @@ class UploadForm extends Model
 
 
             $userRecord = UserRecord::findOne(['id' => $userId]);
-            $userRecord->avatar_path = $filePath;
+            $userRecord->avatar_path = '/img/' . $fileName;
             $userRecord->save();
 
             return true;
