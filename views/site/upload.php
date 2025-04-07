@@ -15,7 +15,7 @@ use yii\imagine\Image;
 
         <?= $form->field($model, 'imageFile')->fileInput() ?>
 
-        <button>Submit</button>
+        <button class="btn btn-primary">Submit</button>
 
     <?php ActiveForm::end() ?>
 </div>
@@ -23,6 +23,6 @@ use yii\imagine\Image;
     <img
         src="<?= $avatarPath ?>"
         alt="<?= $avatarPath ?>"
-        style="height: 200px; width: 200px;"
+        style="height: 200px; width: 200px; border-radius: 500px"
     >
 </div>
