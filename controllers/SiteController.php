@@ -5,6 +5,8 @@ namespace app\controllers;
 use app\models\RegistrationForm;
 use app\models\UploadForm;
 use app\records\UserRecord;
+use entity\UploadedAvatar;
+use Exception;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -12,7 +14,6 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use yii\web\UploadedFile;
 
 class SiteController extends Controller
 {
@@ -132,40 +133,41 @@ class SiteController extends Controller
 
     public function actionUpload()
     {
-        $model = new UploadForm();
-
-        if (Yii::$app->request->isPost) {
-            if (
-                $username = Yii::$app->request->post('UploadForm')['username']
-            ) {
-                $model->username = $username;
-            }
-            if (
-                $email = Yii::$app->request->post('UploadForm')['email']
-            ) {
-                $model->email = $email;
-            }
-            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            $model->upload();
-        }
+        $uploadForm = new UploadForm();
 
         try {
             $userId = \Yii::$app->getUser()->getId();
             $userRecord = UserRecord::findOne(['id' => $userId]);
-            $avatarPath = $userRecord->avatar_path;
-            $username = $userRecord->username;
-            $email = $userRecord->email;
-        } catch (\Exception) {
-            $avatarPath = '';
-            $username = '';
-            $email = '';
+
+//            if (Yii::$app->request->isPost) {
+                $uploadForm->username =
+                    Yii::$app->request->post('UploadForm')['username']
+                    ?? $userRecord->username
+                ;
+                $uploadForm->email =
+                    Yii::$app->request->post('UploadForm')['email']
+                    ?? $userRecord->email
+                ;
+                $uploadForm->imageFile = UploadedAvatar::getInstance($uploadForm, 'imageFile');
+                $uploadForm->upload($userRecord);
+//            }
+
+
+            $uploadForm->avatar_path = $userRecord->avatar_path;
+        } catch (Exception $exception) {
+            return $this->render(
+                'error',
+                [
+                    'name' => 'error',
+                    'message' => $exception->getMessage()
+                ]
+            );
         }
 
-        return $this->render('upload', compact(
-            'model',
-            'avatarPath',
-            'username',
-            'email'
+        return $this->render(
+            'upload',
+            compact(
+            'uploadForm'
         ));
     }
 }

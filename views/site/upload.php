@@ -1,6 +1,6 @@
 <?php
 /**
- * @var UploadForm $model
+ * @var UploadForm $uploadForm
  * @var string $avatarPath
  * @var string $username
  * @var string $email
@@ -18,7 +18,7 @@ use yii\imagine\Image;
     <section>
         <?=
             $form->field(
-                $model,
+                $uploadForm,
                 'imageFile',
                 [
                     'template' => '<label class="control-label btn btn-primary" for="uploadform-imagefile">Change avatar</label>{input}',
@@ -29,8 +29,12 @@ use yii\imagine\Image;
             ->fileInput(['style' => 'display:none'])
             ->label('class="btn btn-primary"')
         ?>
-        <?= $form->field($model, 'username')->textInput(['value' => $username]) ?>
-        <?= $form->field($model, 'email')->textInput(['value' => $email]) ?>
+        <?= $form->field($uploadForm, 'username')
+            ->textInput(['value' => $uploadForm->username])
+        ?>
+        <?= $form->field($uploadForm, 'email')
+            ->textInput(['value' => $uploadForm->email])
+        ?>
 
     </section>
         <button class="btn btn-primary">Submit</button>
@@ -38,13 +42,15 @@ use yii\imagine\Image;
     <?php ActiveForm::end() ?>
 </div>
 <div class="col-lg-3 float-end">
-    <img
-        src="<?= $avatarPath ?>"
-        alt="<?= $avatarPath ?>"
-        style="height: 30vh; width: 30vh; border-radius: 500px"
-    >
     <div class="d-flex justify-content-center">
-        <h3><?= $username ?></h3>
+        <img
+                src="<?= $uploadForm->avatar_path ?>"
+                alt="<?= $uploadForm->avatar_path ?>"
+                style="height: 30vh; width: 30vh; border-radius: 500px"
+        >
+    </div>
+    <div class="d-flex justify-content-center">
+        <h3><?= $uploadForm->username ?></h3>
     </div>
 </div>
 <?= $this->render('_register_js.php') ?>
