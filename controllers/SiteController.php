@@ -14,6 +14,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\web\UploadedFile;
 
 class SiteController extends Controller
 {
@@ -131,7 +132,7 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    public function actionUpload()
+    public function actionUpload(): string
     {
         $uploadForm = new UploadForm();
 
@@ -148,7 +149,8 @@ class SiteController extends Controller
                     Yii::$app->request->post('UploadForm')['email']
                     ?? $userRecord->email
                 ;
-                $uploadForm->imageFile = UploadedAvatar::getInstance($uploadForm, 'imageFile');
+                $uploadForm->imageFile = UploadedFile::getInstance($uploadForm, 'imageFile');
+
                 $uploadForm->upload($userRecord);
 //            }
 
