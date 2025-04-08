@@ -135,8 +135,16 @@ class SiteController extends Controller
         $model = new UploadForm();
 
         if (Yii::$app->request->isPost) {
-//            $model->username = Yii::$app->request->post()['UploadForm']['username'] ?? null;
-//            $model->email = Yii::$app->request->post()['UploadForm']['email'] ?? null;
+            if (
+                $username = Yii::$app->request->post('UploadForm')['username']
+            ) {
+                $model->username = $username;
+            }
+            if (
+                $email = Yii::$app->request->post('UploadForm')['email']
+            ) {
+                $model->email = $email;
+            }
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
             $model->upload();
         }
@@ -146,15 +154,18 @@ class SiteController extends Controller
             $userRecord = UserRecord::findOne(['id' => $userId]);
             $avatarPath = $userRecord->avatar_path;
             $username = $userRecord->username;
+            $email = $userRecord->email;
         } catch (\Exception) {
             $avatarPath = '';
             $username = '';
+            $email = '';
         }
 
         return $this->render('upload', compact(
             'model',
             'avatarPath',
-            'username'
+            'username',
+            'email'
         ));
     }
 }
