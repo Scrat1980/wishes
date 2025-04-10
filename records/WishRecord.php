@@ -20,7 +20,7 @@ use yii\db\ActiveRecord;
  */
 class WishRecord extends ActiveRecord
 {
-
+    public $imageFile;
 
     /**
      * {@inheritdoc}
