@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
@@ -9,13 +9,13 @@ use yii\widgets\ActiveForm;
 ?>
 <div class="CreateWishForm">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
         <?=
         $form->field(
             $model,
             'imageFile',
             [
-                'template' => '<label class="control-label btn btn-primary" for="uploadform-imagefile">Change avatar</label>{input}',
+                'template' => '<label class="control-label btn btn-primary" for="wishrecord-imagefile">Add picture</label>{input}',
                 'errorOptions' => ['tag' => null],
             ],
 

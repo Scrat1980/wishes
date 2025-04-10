@@ -2,8 +2,10 @@
 
 namespace app\records;
 
+use app\models\UploadConfig;
 use Yii;
 use yii\db\ActiveRecord;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "wish".
@@ -20,14 +22,26 @@ use yii\db\ActiveRecord;
  */
 class WishRecord extends ActiveRecord
 {
-    public $imageFile;
+    public UploadedFile|string|null $imageFile = '';
+    public UploadConfig|null $uploadConfig=null;
+    public string|null $name = null;
+    public string|null $photo_path = null;
+    public string|null $description = null;
+    public string|null $link = null;
+    public int|null $price = null;
+
+    public function __construct()
+    {
+        $this->uploadConfig = new UploadConfig();
+        parent::__construct();
+    }
 
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'wish';
+        return '{{%wish}}';
     }
 
     /**
@@ -36,7 +50,7 @@ class WishRecord extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'wish_list_id', 'photo_path', 'name', 'description', 'link', 'price', 'is_secret'], 'default', 'value' => null],
+            [['user_id', 'wish_list_id', 'photo_path', 'name', 'description', 'link', 'price', 'is_secret'], 'default', 'value' => null],[['user_id', 'wish_list_id', 'photo_path', 'name', 'description', 'link', 'price', 'is_secret'], 'safe'],
             [['user_id', 'wish_list_id', 'price', 'is_secret'], 'integer'],
             [['photo_path', 'name', 'description', 'link'], 'string', 'max' => 255],
         ];
@@ -69,4 +83,22 @@ class WishRecord extends ActiveRecord
         return new WishQuery(get_called_class());
     }
 
+    public function saveData(): void
+    {
+        if ($this->imageFile) {
+            $this->photo_path = $this->uploadConfig->getNameForDb($this->imageFile);
+            $fileNameForFileSystem = $this->uploadConfig->getNameForFileSystem($this->imageFile);
+            $this->imageFile->saveAs($fileNameForFileSystem);
+            chmod($fileNameForFileSystem, 0777);
+        }
+
+        $wishRecord = new WishRecord();
+        $wishRecord->name = $this->name;
+        $wishRecord->description = $this->description;
+        $wishRecord->link = $this->link;
+        $wishRecord->price = $this->price;
+
+        $wishRecord->save();
+
+    }
 }
