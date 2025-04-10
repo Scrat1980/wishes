@@ -8,7 +8,7 @@ return [
         '<li class="nav-item">'
         . Html::beginForm(['/site/logout'])
         . Html::submitButton(
-            'Logout (' . Yii::$app->user->identity->username . ')',
+            'Sign out (' . Yii::$app->user->identity->username . ')',
             ['class' => 'nav-link btn btn-link logout']
         )
         . Html::endForm()

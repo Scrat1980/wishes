@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=wishes3-mysql-db-1;dbname=db',
+    'dsn' => 'mysql:host=wishes-mysql-db-1;dbname=db',
     'username' => 'user',
     'password' => 'pass',
     'charset' => 'utf8',

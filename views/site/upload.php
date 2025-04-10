@@ -24,7 +24,6 @@ use yii\imagine\Image;
                     'template' => '<label class="control-label btn btn-primary" for="uploadform-imagefile">Change avatar</label>{input}',
                     'errorOptions' => ['tag' => null],
                 ],
-
             )
             ->fileInput(['style' => 'display:none'])
             ->label('class="btn btn-primary"')
@@ -34,6 +33,13 @@ use yii\imagine\Image;
         ?>
         <?= $form->field($uploadForm, 'email')
             ->textInput(['value' => $uploadForm->email])
+        ?>
+        <?= $form->field($uploadForm, 'avatar_path')
+            ->label(false)
+            ->textInput([
+                'value' => $uploadForm->avatar_path,
+                'style' => 'display:none',
+            ])
         ?>
 
     </section>

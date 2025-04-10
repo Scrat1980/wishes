@@ -5,7 +5,6 @@ namespace app\controllers;
 use app\models\RegistrationForm;
 use app\models\UploadForm;
 use app\records\UserRecord;
-use entity\UploadedAvatar;
 use Exception;
 use Yii;
 use yii\filters\AccessControl;
@@ -13,7 +12,6 @@ use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use app\models\ContactForm;
 use yii\web\UploadedFile;
 
 class SiteController extends Controller
@@ -93,11 +91,6 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
     public function actionRegister()
     {
         if (!Yii::$app->user->isGuest) {
@@ -132,44 +125,29 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    public function actionUpload(): string
+    public function actionUpload()
     {
         $uploadForm = new UploadForm();
-
-        try {
-            $userId = \Yii::$app->getUser()->getId();
-            $userRecord = UserRecord::findOne(['id' => $userId]);
-
-//            if (Yii::$app->request->isPost) {
-                $uploadForm->username =
-                    Yii::$app->request->post('UploadForm')['username']
-                    ?? $userRecord->username
-                ;
-                $uploadForm->email =
-                    Yii::$app->request->post('UploadForm')['email']
-                    ?? $userRecord->email
-                ;
+        if (
+            Yii::$app->request->isPost
+            && $uploadForm->load(Yii::$app->request->post())
+        ) {
+            if (
+                $uploadForm->validate()
+            ) {
                 $uploadForm->imageFile = UploadedFile::getInstance($uploadForm, 'imageFile');
-
-                $uploadForm->upload($userRecord);
-//            }
-
-
-            $uploadForm->avatar_path = $userRecord->avatar_path;
-        } catch (Exception $exception) {
-            return $this->render(
-                'error',
-                [
-                    'name' => 'error',
-                    'message' => $exception->getMessage()
-                ]
-            );
+                try {
+                    $uploadForm->save();
+                } catch (Exception $e) {
+                    Yii::$app->session->setFlash('error', $e->getMessage());
+                }
+            }
+        } else {
+            $userId = Yii::$app->user->getId();
+            $user = UserRecord::findOne(['id' => $userId]);
+            $uploadForm->load(['UploadForm' => $user->attributes]);
         }
 
-        return $this->render(
-            'upload',
-            compact(
-            'uploadForm'
-        ));
+        return $this->render('upload', ['uploadForm' => $uploadForm]);
     }
 }
