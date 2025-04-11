@@ -4,6 +4,7 @@ use yii\bootstrap5\Html;
 
 return [
         ['label' => 'My wishes', 'url' => ['/wish']],
+        ['label' => 'Make a wish', 'url' => ['/wish/create']],
         ['label' => 'Settings', 'url' => ['/site/upload']],
         '<li class="nav-item">'
         . Html::beginForm(['/site/logout'])

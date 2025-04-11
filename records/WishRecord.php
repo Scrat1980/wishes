@@ -24,11 +24,6 @@ class WishRecord extends ActiveRecord
 {
     public UploadedFile|string|null $imageFile = '';
     public UploadConfig|null $uploadConfig=null;
-    public string|null $name = null;
-    public string|null $photo_path = null;
-    public string|null $description = null;
-    public string|null $link = null;
-    public int|null $price = null;
 
     public function __construct()
     {
@@ -39,7 +34,7 @@ class WishRecord extends ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return '{{%wish}}';
     }
@@ -50,7 +45,8 @@ class WishRecord extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'wish_list_id', 'photo_path', 'name', 'description', 'link', 'price', 'is_secret'], 'default', 'value' => null],[['user_id', 'wish_list_id', 'photo_path', 'name', 'description', 'link', 'price', 'is_secret'], 'safe'],
+            [['user_id', 'wish_list_id', 'photo_path', 'name', 'description', 'link', 'price', 'is_secret'], 'default', 'value' => null],
+            [['name'], 'safe'],
             [['user_id', 'wish_list_id', 'price', 'is_secret'], 'integer'],
             [['photo_path', 'name', 'description', 'link'], 'string', 'max' => 255],
         ];
@@ -101,4 +97,5 @@ class WishRecord extends ActiveRecord
         $wishRecord->save();
 
     }
+
 }

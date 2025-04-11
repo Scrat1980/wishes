@@ -9,7 +9,6 @@
 use app\models\UploadForm;
 use yii\widgets\ActiveForm;
 use yii\bootstrap5\Html;
-use yii\imagine\Image;
 
 ?>
 <h3>Settings</h3>
