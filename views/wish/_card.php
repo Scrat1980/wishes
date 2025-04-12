@@ -9,9 +9,9 @@ use app\records\WishRecord;
 
 <!--<div class="col-sm-3">-->
 <div class="w-auto p-7">
-    <div class="card" style="width: 18rem;">
+    <div class="card" style="width: 9rem; border: none">
       <img src="<?= $wish->photo_path ?>" class="card-img-top"
-           alt="<?= $wish->photo_path ?>"
+           alt="<?= $wish->photo_path ?>" style="border-radius: 10px"
       >
       <div class="card-body">
         <h5 class="card-title"><?= $wish->name ?></h5>

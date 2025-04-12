@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\forms\CreateWishForm;
+use app\records\UserRecord;
 use app\records\WishRecord;
 use Exception;
 use yii\db\Query;
@@ -20,8 +21,16 @@ class WishController extends Controller
             ->where(['user_id' => Yii::$app->user->id])
             ->all()
         ;
+        $userId = Yii::$app->user->id;
+        $user = UserRecord::find()->where(['id' => $userId])->one();
+        $avatar = $user->avatar_path;
+        $username = $user->username;
 
-        return $this->render('index', ['wishes' => $wishes]);
+        return $this->render('index', [
+            'wishes' => $wishes,
+            'avatar' => $avatar,
+            'username' => $username,
+        ]);
     }
 
     public function actionDelete()
