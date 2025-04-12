@@ -51,7 +51,7 @@ use yii\bootstrap5\Html;
         <img
                 src="<?= $uploadForm->avatar_path ?>"
                 alt="<?= $uploadForm->avatar_path ?>"
-                style="height: 30vh; width: 30vh; border-radius: 500px"
+                style="height: 10vh; width: 10vh; border-radius: 500px"
         >
     </div>
     <div class="d-flex justify-content-center">

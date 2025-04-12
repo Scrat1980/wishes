@@ -62,7 +62,7 @@ class SiteController extends Controller
      * Displays homepage.
      *
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
 //        return $this->redirect(['site/login']);
         return $this->render('index');
