@@ -48,6 +48,8 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'wish/delete/<id:\d+>' => 'wish/delete',
+                'wish/view/<id:\d+>' => 'wish/view',
+                'wish/edit/<id:\d+>' => 'wish/edit',
             ],
         ],
 

@@ -6,8 +6,6 @@ use app\models\forms\CreateWishForm;
 use app\records\UserRecord;
 use app\records\WishRecord;
 use Exception;
-use yii\db\Query;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 use Yii;
 use yii\web\Response;
@@ -33,24 +31,36 @@ class WishController extends Controller
         ]);
     }
 
-    public function actionDelete($id): Response
+    public function actionView($id): Response|string
     {
+        $createWishForm = new CreateWishForm();
         $wish = WishRecord::findOne($id);
-        if ($wish) {
-            try {
-                $wish->delete();
-            } catch (\Throwable $e) {
-                Yii::$app->session->setFlash('error', $e->getMessage());
-            }
-            Yii::$app->session->setFlash('success', 'Wish deleted');
+
+        if (
+            $wish
+        ) {
+            $createWishForm->setAttributes($wish->attributes);
+
+            return $this->render('create', ['model' => $createWishForm]);
         }
 
         return $this->redirect('/wish');
     }
 
-    public function actionView()
+    public function actionEdit($id): Response|string
     {
-        return $this->render('view');
+        $createWishForm = new CreateWishForm();
+        $wish = WishRecord::findOne($id);
+
+        if (
+            $wish
+        ) {
+            $createWishForm->setAttributes($wish->attributes);
+
+            return $this->render('create', ['model' => $createWishForm]);
+        }
+
+        return $this->redirect('/wish');
     }
 
     public function actionCreate(): string|Response
@@ -86,6 +96,21 @@ class WishController extends Controller
 
         return $this->render('create', ['model' => $createWishForm]);
 
+    }
+
+    public function actionDelete($id): Response
+    {
+        $wish = WishRecord::findOne($id);
+        if ($wish) {
+            try {
+                $wish->delete();
+            } catch (\Throwable $e) {
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+            Yii::$app->session->setFlash('success', 'Wish deleted');
+        }
+
+        return $this->redirect('/wish');
     }
 
 }
