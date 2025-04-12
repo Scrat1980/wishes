@@ -49,13 +49,13 @@ use yii\bootstrap5\Html;
 <div class="col-lg-3 float-end">
     <div class="d-flex justify-content-center">
         <img
-                src="<?= $uploadForm->avatar_path ?>"
-                alt="<?= $uploadForm->avatar_path ?>"
-                style="height: 10vh; width: 10vh; border-radius: 500px"
+            src="<?= $uploadForm->avatar_path ?>"
+            alt="<?= $uploadForm->avatar_path ?>"
+            style="height: 10vh; width: 10vh; border-radius: 500px"
         >
     </div>
     <div class="d-flex justify-content-center">
-        <h3><?= $uploadForm->username ?></h3>
+        <h3><?php echo ucfirst($uploadForm->username) ?></h3>
     </div>
 </div>
 <?= $this->render('_register_js.php') ?>

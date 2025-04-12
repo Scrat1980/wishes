@@ -86,3 +86,10 @@ a.desc:after {
 .form-group {
     margin-bottom: 1rem;
 }
+
+.hoverish {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}

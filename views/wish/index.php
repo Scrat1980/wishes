@@ -14,20 +14,20 @@ use yii\web\View;
 <div class="row">
     <div class="d-flex justify-content-center">
         <img
-                src="<?= $avatar ?>"
-                alt="<?= $avatar ?>"
-                style="height: 10vh; width: 10vh; border-radius: 500px"
+            src="<?= $avatar ?>"
+            alt="<?= $avatar ?>"
+            style="height: 10vh; width: 10vh; border-radius: 500px"
         >
     </div>
     <div class="d-flex justify-content-center">
-        <h3><?= $username ?></h3>
+        <h3><?php echo ucfirst($username) ?></h3>
     </div>
 </div>
 
-<div class="row">
+<div class="cards row">
 <?php
-    foreach ($wishes as $wish) {
-        echo $this->render('_card.php', ['wish' => $wish]);
+    foreach ($wishes as $i => $wish) {
+        echo $this->render('_card.php', ['i' => $i, 'wish' => $wish]);
     }
 ?>
 </div>
