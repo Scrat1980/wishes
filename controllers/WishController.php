@@ -33,9 +33,19 @@ class WishController extends Controller
         ]);
     }
 
-    public function actionDelete()
+    public function actionDelete($id): Response
     {
-        return $this->render('delete');
+        $wish = WishRecord::findOne($id);
+        if ($wish) {
+            try {
+                $wish->delete();
+            } catch (\Throwable $e) {
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+            Yii::$app->session->setFlash('success', 'Wish deleted');
+        }
+
+        return $this->redirect('/wish');
     }
 
     public function actionView()
@@ -54,27 +64,21 @@ class WishController extends Controller
                 $createWishForm->validate()
             ) {
                 $createWishForm->imageFile = UploadedFile::getInstance($createWishForm, 'imageFile');
+                $wish = new WishRecord();
+                $wish->name = $createWishForm->name;
+                $wish->description = $createWishForm->description;
+                $wish->link = $createWishForm->link;
+                $wish->price = $createWishForm->price;
+                $wish->user_id = (int) Yii::$app->user->id;
+                $wish->is_secret = $createWishForm->is_secret == 'on' ? 1 : 0;
                 try {
-
-                    $wish = new WishRecord();
-                    $wish->name = $createWishForm->name;
-                    $wish->description = $createWishForm->description;
-                    $wish->link = $createWishForm->link;
-                    $wish->price = $createWishForm->price;
-                    $wish->is_secret = $createWishForm->is_secret == 'on' ? 1 : 0;
-                    $wish->user_id = (int) Yii::$app->user->id;
                     $wish->photo_path = $createWishForm->savePhoto();
                     $wish->save();
-
 
                     $createWishForm->photo_path = $wish->photo_path;
                 } catch (Exception $e) {
                     Yii::$app->session->setFlash('error', $e->getMessage());
                 }
-                $wishes = WishRecord::find()
-                    ->where(['user_id' => Yii::$app->user->id])
-                    ->all()
-                ;
 
                 return $this->redirect(['index']);
             }

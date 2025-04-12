@@ -10,15 +10,8 @@ use yii\web\View;
 ?>
 
 <h3>My wishes</h3>
-<div class="row">
-<?php
-    foreach ($wishes as $wish) {
-        echo $this->render('_card.php', ['wish' => $wish]);
-    }
-?>
-</div>
 
-<div class="col-lg-3 float-end">
+<div class="row">
     <div class="d-flex justify-content-center">
         <img
                 src="<?= $avatar ?>"
@@ -29,4 +22,12 @@ use yii\web\View;
     <div class="d-flex justify-content-center">
         <h3><?= $username ?></h3>
     </div>
+</div>
+
+<div class="row">
+<?php
+    foreach ($wishes as $wish) {
+        echo $this->render('_card.php', ['wish' => $wish]);
+    }
+?>
 </div>

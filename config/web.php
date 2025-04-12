@@ -47,6 +47,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'wish/delete/<id:\d+>' => 'wish/delete',
             ],
         ],
 
