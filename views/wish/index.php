@@ -23,7 +23,12 @@ use yii\web\View;
         <h3><?php echo ucfirst($username) ?></h3>
     </div>
 </div>
+<div class="test" style="width: 100px; height: 100px; background: grey; position: relative;">
+    <div class="hoverish">
+        <button id="bb">iii</button>
+    </div>
 
+</div>
 <div class="cards row">
 <?php
     foreach ($wishes as $i => $wish) {

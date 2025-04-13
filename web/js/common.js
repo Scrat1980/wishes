@@ -1,28 +1,30 @@
-App = {
+let App = {
     initialize: () => {
-        let cards = document.querySelector('.cards');
-        cards.addEventListener('mouseover', (e) => {
+        let main = document.querySelector('#main');
+        let square = document.querySelector('.test');
+        let button = document.querySelector('#bb');
+        let hover = document.querySelector('.hoverish');
+        main.addEventListener('mouseover', (e) => {
             if (
-                !e.target.classList.contains('mycard')
-                && !e.target.parentElement.classList.contains('mycard')
-            ) { return; }
-
-            let hoverish = document.querySelectorAll('.hoverish')
-                e.target.firstElementChild.firstElementChild;
-            // hoverish.style.display = 'block';
-            // console.log(
-            //     !e.target.classList.contains('mycard')
-            //     && !e.target.parentElement.classList.contains('mycard')
-            // );
-            console.log(e.target.parentElement);
-            console.log(e.target);
+                e.target !== square
+                // || e.target !== button
+            )
+            {
+                return;
+            }
+            // console.log(e.target);
+            hover.style.display = 'block';
         });
-        // cards.addEventListener('mouseout', (e) => {
-        //     if (!e.target.classList.contains('mycard')) { return; }
-        //
-        //     let hoverish = e.target.firstElementChild.firstElementChild;
-        //     hoverish.style.display = 'none';
-        // });
+        main.addEventListener('mouseout', (e) => {
+            if (
+                e.target !== square
+                // || e.target !== button
+            )
+            {
+                return;
+            }
+            hover.style.display = 'none';
+        });
     }
 };
 
