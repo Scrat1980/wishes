@@ -1,34 +1,39 @@
 let App = {
     initialize: () => {
         let main = document.querySelector('#main');
+        let cards = document.querySelectorAll('.mycard');
         main.addEventListener('mouseover', (e) => {
-            // console.log();
-            if (
-                document.querySelector('.hoverish[data-number]')
-                && !e.target.contains(document.querySelector('.hoverish[data-number]'))
-            ) {
-                return;
-            }
+            for (let i in cards) {
+                if (
+                    cards[i].contains(e.target)
+                ) {
+                    let hover = document.querySelector(
+                        '.hoverish[data-number="' + cards[i].dataset.number + '"]'
+                    );
+                    if (hover) {
+                        hover.style.display = 'block';
+                    }
 
-            let hover = document.querySelector(
-                '.hoverish[data-number="' + e.target.dataset.number + '"]'
-            );
-            if (hover) {
-                hover.style.display = 'block';
+                    console.log(hover);
+                    break;
+                }
             }
         });
         main.addEventListener('mouseout', (e) => {
-            if (
-                document.querySelector('.hoverish[data-number]')
-                && !e.target.contains(document.querySelector('.hoverish[data-number]'))
-            ) {
-                return;
-            }
-            let hover = document.querySelector(
-                '.hoverish[data-number="' + e.target.dataset.number + '"]'
-            );
-            if (hover) {
-                hover.style.display = 'none';
+            for (let i in cards) {
+                if (
+                    cards[i].contains(e.target)
+                ) {
+                    let hover = document.querySelector(
+                        '.hoverish[data-number="' + cards[i].dataset.number + '"]'
+                    );
+                    if (hover) {
+                        hover.style.display = 'none';
+                    }
+
+                    console.log(hover);
+                    break;
+                }
             }
         });
     }
