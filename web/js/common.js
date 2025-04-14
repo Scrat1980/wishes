@@ -1,29 +1,35 @@
 let App = {
     initialize: () => {
         let main = document.querySelector('#main');
-        let square = document.querySelector('.test');
-        let button = document.querySelector('#bb');
-        let hover = document.querySelector('.hoverish');
         main.addEventListener('mouseover', (e) => {
+            // console.log();
             if (
-                e.target !== square
-                // || e.target !== button
-            )
-            {
+                document.querySelector('.hoverish[data-number]')
+                && !e.target.contains(document.querySelector('.hoverish[data-number]'))
+            ) {
                 return;
             }
-            // console.log(e.target);
-            hover.style.display = 'block';
+
+            let hover = document.querySelector(
+                '.hoverish[data-number="' + e.target.dataset.number + '"]'
+            );
+            if (hover) {
+                hover.style.display = 'block';
+            }
         });
         main.addEventListener('mouseout', (e) => {
             if (
-                e.target !== square
-                // || e.target !== button
-            )
-            {
+                document.querySelector('.hoverish[data-number]')
+                && !e.target.contains(document.querySelector('.hoverish[data-number]'))
+            ) {
                 return;
             }
-            hover.style.display = 'none';
+            let hover = document.querySelector(
+                '.hoverish[data-number="' + e.target.dataset.number + '"]'
+            );
+            if (hover) {
+                hover.style.display = 'none';
+            }
         });
     }
 };
