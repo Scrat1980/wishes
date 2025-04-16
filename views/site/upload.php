@@ -58,4 +58,4 @@ use yii\bootstrap5\Html;
         <h3><?php echo ucfirst($uploadForm->username) ?></h3>
     </div>
 </div>
-<?= $this->render('_register_js.php') ?>
+<?php //= $this->render('_register_js.php') ?>

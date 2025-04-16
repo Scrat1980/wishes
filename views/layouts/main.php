@@ -69,6 +69,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 
 <?php $this->endBody() ?>
 </body>
-<?php $this->registerJsFile('@web/js/common.js', ['position' => View::POS_END,]);?>
+<?php //$this->registerJsFile('@web/js/_register_js.php', ['position' => View::POS_END,]);?>
+<?= $this->render('_register_js.php') ?>
+
 </html>
 <?php $this->endPage() ?>
