@@ -103,7 +103,11 @@ class SiteController extends Controller
             && $model->validate()
         ) {
             $model->register();
-
+            $lf = new LoginForm();
+            $lf->setAttributes($model->attributes);
+            if ($lf->login()) {
+                return $this->goHome();
+            }
             return $this->goBack();
         }
 
