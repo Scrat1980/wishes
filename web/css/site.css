@@ -91,6 +91,28 @@ a.desc:after {
     display: none;
     color: white;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 0px;
+    right: 0px;
+}
+
+.st {
+    text-decoration: none;
+    background: white;
+    opacity: 0.6;
+    border-radius: 5px;
+    font-size: 30px;
+}
+
+.st:hover {
+    opacity: 0.9;
+}
+
+.sti {
+    color: #303030;
+    opacity: .5;
+    font-size: 30px;
+}
+
+.sti:hover {
+    opacity: 1;
 }
