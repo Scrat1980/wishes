@@ -29,8 +29,8 @@ use app\records\WishRecord;
         <div class="card-body">
             <h5 class="card-title"><?= $wish->name ?></h5>
             <p class="card-text"><?= $wish->price ?></p>
-            <a href="<?= $wish->link ?>" class="card-link">Purchase</a>
-            <a href="#" class="card-link">Contribute</a>
+            <a href="<?= $wish->link ?>" >Where to buy</a>
+            <a href="<?= $wish->link ?>" >Contribute via bank</a>
         </div>
     </div>
 </div>

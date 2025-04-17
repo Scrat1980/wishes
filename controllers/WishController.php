@@ -66,7 +66,6 @@ class WishController extends Controller
         } else {
             $createWishForm->load(Yii::$app->request->post());
             $createWishForm->imageFile = UploadedFile::getInstance($createWishForm, 'imageFile');
-//            $wish = new WishRecord();
             $wish = WishRecord::findOne($id);
             $wish->id = $createWishForm->id;
             $wish->name = $createWishForm->name;

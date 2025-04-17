@@ -68,7 +68,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'id')
             ->label(false)
             ->textInput([
-                'value' => $model->id,
+                'value' => $model->id ?? 0,
                 'style' => 'display:none',
             ])
         ?>
