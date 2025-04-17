@@ -46,7 +46,7 @@ class WishRecord extends ActiveRecord
     {
         return [
             [['user_id', 'wish_list_id', 'photo_path', 'name', 'description', 'link', 'price', 'is_secret'], 'default', 'value' => null],
-            [['name'], 'safe'],
+            [['name', 'id'], 'safe'],
             [['user_id', 'wish_list_id', 'price', 'is_secret'], 'integer'],
             [['photo_path', 'name', 'description', 'link'], 'string', 'max' => 255],
         ];

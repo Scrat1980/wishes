@@ -50,14 +50,42 @@ class WishController extends Controller
     public function actionEdit($id): Response|string
     {
         $createWishForm = new CreateWishForm();
-        $wish = WishRecord::findOne($id);
-
         if (
-            $wish
+            !Yii::$app->request->isPost
         ) {
-            $createWishForm->setAttributes($wish->attributes);
+            $wish = WishRecord::findOne($id);
 
-            return $this->render('create', ['model' => $createWishForm]);
+            if (
+                $wish
+            ) {
+                $createWishForm->setAttributes($wish->attributes);
+                $createWishForm->id = $wish->id;
+
+                return $this->render('create', ['model' => $createWishForm]);
+            }
+        } else {
+            $createWishForm->load(Yii::$app->request->post());
+            $createWishForm->imageFile = UploadedFile::getInstance($createWishForm, 'imageFile');
+//            $wish = new WishRecord();
+            $wish = WishRecord::findOne($id);
+            $wish->id = $createWishForm->id;
+            $wish->name = $createWishForm->name;
+            $wish->description = $createWishForm->description;
+            $wish->link = $createWishForm->link;
+            $wish->price = $createWishForm->price;
+            $wish->user_id = (int) Yii::$app->user->id;
+            $wish->is_secret = $createWishForm->is_secret == 'on' ? 1 : 0;
+            try {
+                $wish->photo_path = $createWishForm->savePhoto();
+                $wish->save();
+
+                $createWishForm->photo_path = $wish->photo_path;
+            } catch (Exception $e) {
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+
+            return $this->redirect(['index']);
+
         }
 
         return $this->redirect('/wish');

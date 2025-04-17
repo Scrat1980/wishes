@@ -65,6 +65,13 @@ use yii\widgets\ActiveForm;
 //            )
 //            ->checkbox(['class' => 'form-check-input'])
 //        ?>
+        <?= $form->field($model, 'id')
+            ->label(false)
+            ->textInput([
+                'value' => $model->id,
+                'style' => 'display:none',
+            ])
+        ?>
 
         <div
             class="form-group form-check form-switch field-wishrecord-is_secret"

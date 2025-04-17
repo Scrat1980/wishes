@@ -12,6 +12,7 @@ class CreateWishForm extends ImageUploadForm
     public UploadConfig $uploadConfig;
     public int|string|null $user_id = null;
     public int|string|null $wish_list_id = null;
+    public ?int $id = null;
     public ?string $photo_path = null;
     public ?string $name = null;
     public ?string $description = null;
@@ -22,7 +23,7 @@ class CreateWishForm extends ImageUploadForm
     public function rules(): array
     {
         return [
-            [['user_id', 'wish_list_id', 'name', 'description', 'link', 'price', 'is_secret', 'photo_path'], 'safe'],
+            [['user_id', 'wish_list_id', 'name', 'description', 'link', 'price', 'is_secret', 'photo_path', 'id'], 'safe'],
             [['price'], 'integer', 'min' => 0],
         ];
     }
