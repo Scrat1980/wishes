@@ -64,6 +64,14 @@ class SiteController extends Controller
      */
     public function actionIndex(): string
     {
+
+        echo '<pre>';
+        var_dump(
+            $_SERVER["HTTP_USER_AGENT"]
+        );
+        echo '</pre>';
+        die;
+
 //        return $this->redirect(['site/login']);
         return $this->render('index');
     }
