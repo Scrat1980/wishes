@@ -6,6 +6,7 @@ use app\models\RegistrationForm;
 use app\models\UploadForm;
 use app\records\UserRecord;
 use Exception;
+use app\services\MobileService;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -16,6 +17,11 @@ use yii\web\UploadedFile;
 
 class SiteController extends Controller
 {
+    public function __construct($id, $module, $config = [])
+    {
+        $this->layout = 'mobile';
+        parent::__construct($id, $module, $config);
+    }
     /**
      * {@inheritdoc}
      */
@@ -64,8 +70,16 @@ class SiteController extends Controller
      */
     public function actionIndex(): string
     {
+        $isMobile = (new MobileService())->isMobile();
+
 //        return $this->redirect(['site/login']);
-        return $this->render('index');
+
+        return
+//            !$isMobile
+//                ? $this->render('index')
+//                :
+        $this->render('/mobile/site/index')
+        ;
     }
 
     /**

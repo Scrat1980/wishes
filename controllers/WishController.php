@@ -13,6 +13,12 @@ use yii\web\UploadedFile;
 
 class WishController extends Controller
 {
+    public function __construct($id, $module, $config = [])
+    {
+        $this->layout = 'mobile';
+        parent::__construct($id, $module, $config);
+    }
+
     public function actionIndex(): string
     {
         $wishes = WishRecord::find()
@@ -24,7 +30,7 @@ class WishController extends Controller
         $avatar = $user->avatar_path;
         $username = $user->username;
 
-        return $this->render('index', [
+        return $this->render('../mobile/wish/index', [
             'wishes' => $wishes,
             'avatar' => $avatar,
             'username' => $username,
