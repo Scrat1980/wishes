@@ -34,20 +34,6 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <?php $this->beginBody() ?>
 
 <header id="header">
-    <?php if(!Yii::$app->user->isGuest) {?>
-<!--    <li class="nav-item">-->
-        <?= Html::beginForm(['/site/logout'])?>
-        <?= Html::submitButton(
-        '<span class="bi bi-box-arrow-right"></span> (' . Yii::$app->user->identity->username . ')',
-        [
-            'class' => 'nav-link btn btn-link logout',
-            'style' => 'float: right; font-size: 1.8rem; color: #303030;'
-        ]
-        )?>
-        <?= Html::endForm()?>
-    <?php }?>
-
-    <!--    </li>-->
 </header>
 
 <main id="main" class="flex-shrink-0" role="main">
@@ -73,10 +59,21 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container">
         <div class="row justify-content-md-center">
+<!--            <div class="col col-3">-->
+<!--                <a class="navbar-brand" href="#">-->
+<!--                    <img src="/favicon.ico" alt="">-->
+<!--                </a>-->
+<!--            </div>-->
             <div class="col col-3">
-                <a class="navbar-brand" href="#">
-                    <img src="/favicon.ico" alt="">
-                </a>
+                <?= Html::beginForm(['/site/logout'])?>
+                <?= Html::submitButton(
+                    '<span class="bi bi-box-arrow-right"></span>',
+                    [
+                        'class' => 'nav-link btn btn-link logout',
+                        'style' => 'float: right; font-size: 1.8rem; color: #303030;'
+                    ]
+                )?>
+                <?= Html::endForm()?>
             </div>
             <div class="col col-3">
                 <a class="nav-link active" aria-current="page" href="/wish">

@@ -13,9 +13,9 @@ require __DIR__ . '/../models/Application.php';
 
 $config = require __DIR__ . '/../config/web.php';
 
-//(new yii\web\Application($config))->run();
-try {
-    (new Application($config))->run();
-} catch (InvalidConfigException $e) {
-    echo $e->getMessage();
-}
+(new yii\web\Application($config))->run();
+//try {
+//    (new Application($config))->run();
+//} catch (InvalidConfigException $e) {
+//    echo $e->getMessage();
+//}
