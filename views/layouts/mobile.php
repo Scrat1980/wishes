@@ -77,7 +77,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             </div>
             <div class="col col-3">
                 <a class="nav-link active" aria-current="page" href="/wish">
-                    <i class="bi bi-house-fill" style="font-size: 1.8rem; color: #303030;"></i>
+                    <i class="bi bi-house" style="font-size: 1.8rem; color: #303030;"></i>
                 </a>
             </div>
             <div class="col col-3">
@@ -87,7 +87,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             </div>
             <div class="col col-3">
                 <a class="nav-link" href="/wish/create">
-                    <i class="bi bi-plus-circle-fill" style="font-size: 1.8rem; color: #303030;"></i>
+                    <i class="bi bi-plus-circle" style="font-size: 1.8rem; color: #303030;"></i>
                 </a>
             </div>
         </div>
