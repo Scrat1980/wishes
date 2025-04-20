@@ -56,7 +56,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 </footer>
 
 <?php if(!Yii::$app->user->isGuest) {?>
-<nav class="navbar navbar-expand-lg bg-body-tertiary" style="position: fixed; top: 75vh; background: #d8d8d8;">
+<nav class="navbar navbar-expand-lg bg-body-tertiary"
+     style="position: fixed; bottom: 1vh; background: #d8d8d8; width: 100%;">
     <div class="container">
         <div class="row justify-content-md-center">
 <!--            <div class="col col-3">-->
