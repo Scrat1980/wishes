@@ -49,7 +49,7 @@ use yii\bootstrap5\Html;
 <div class="col-lg-3 float-end">
     <div class="d-flex justify-content-center">
         <img
-            src="<?= $uploadForm->avatar_path ?>"
+            src="<?php echo $uploadForm->avatar_path ?? '/img/placeholder_person.jpeg' ?>"
             alt="<?= $uploadForm->avatar_path ?>"
             style="height: 10vh; width: 10vh; border-radius: 500px"
         >

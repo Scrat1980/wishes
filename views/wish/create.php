@@ -9,9 +9,9 @@ use yii\web\View;
 <div class="col-lg-3 float-end">
     <div class="d-flex justify-content-center">
         <img
-                src="<?= $model->photo_path ?>"
-                alt="<?= $model->photo_path ?>"
-                style="height: 30vh; width: 30vh; border-radius: 500px"
+            src="<?php echo $model->photo_path  ?? '/img/placeholder_thing.png'?>"
+            alt="<?= $model->photo_path ?>"
+            style="height: 30vh; width: 30vh; border-radius: 50px"
         >
     </div>
     <div class="d-flex justify-content-center">
