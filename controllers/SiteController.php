@@ -100,7 +100,7 @@ class SiteController extends Controller
         }
 
         $model->password = '';
-        return $this->render('login', [
+        return $this->render('/mobile/site/login', [
             'model' => $model,
         ]);
     }
