@@ -13,14 +13,16 @@ use yii\bootstrap5\Html;
 ?>
 <h3>Settings</h3>
 <div class="col-lg-6 float-start">
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
+    <?php
+    $src = $uploadForm->avatar_path ?? '/img/placeholder_person.jpeg';
+    $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
     <section>
         <?=
             $form->field(
                 $uploadForm,
                 'imageFile',
                 [
-                    'template' => '<label class="control-label btn btn-primary" for="uploadform-imagefile">Change avatar</label>{input}',
+                    'template' => '<label class="control-label" for="uploadform-imagefile"><img src="' . $src . '" style="width: 100px; height: 100px; border-radius: 500px;"><h3>' . ucfirst($uploadForm->username) . '   </h3></label>{input}',
                     'errorOptions' => ['tag' => null],
                 ],
             )
@@ -48,14 +50,14 @@ use yii\bootstrap5\Html;
 </div>
 <div class="col-lg-3 float-end">
     <div class="d-flex justify-content-center">
-        <img
-            src="<?php echo $uploadForm->avatar_path ?? '/img/placeholder_person.jpeg' ?>"
-            alt="<?= $uploadForm->avatar_path ?>"
-            style="height: 10vh; width: 10vh; border-radius: 500px"
-        >
+<!--        <img-->
+<!--            src="--><?php //echo $uploadForm->avatar_path ?? '/img/placeholder_person.jpeg' ?><!--"-->
+<!--            alt="--><?php //= $uploadForm->avatar_path ?><!--"-->
+<!--            style="height: 10vh; width: 10vh; border-radius: 500px"-->
+<!--        >-->
     </div>
-    <div class="d-flex justify-content-center">
-        <h3><?php echo ucfirst($uploadForm->username) ?></h3>
-    </div>
+<!--    <div class="d-flex justify-content-center">-->
+<!--        <h3>--><?php //echo ucfirst($uploadForm->username) ?><!--</h3>-->
+<!--    </div>-->
 </div>
 <?php //= $this->render('_register_js.php') ?>

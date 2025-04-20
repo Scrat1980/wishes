@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
             $model,
             'imageFile',
             [
-                'template' => '<label class="control-label btn btn-primary" for="createwishform-imagefile">Add picture</label>{input}',
+                'template' => '<label class="control-label" for="createwishform-imagefile"><img src="/img/placeholder_thing.png" style="width: 100px; height: 100px;"></label>{input}',
                 'errorOptions' => ['tag' => null],
             ],
 
