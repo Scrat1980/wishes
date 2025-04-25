@@ -121,3 +121,22 @@ a.desc:after {
     width: 9rem;
     border: none;
 }
+
+.iz_card {
+    width: 100%;
+    float: left;
+    border: 1px #303030 solid;
+    margin: 10px 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+}
+
+.iz_card_min {
+    /*width: 207px;*/
+    height: 50px;
+    background: aquamarine;
+    float: left;
+    border: 1px #303030 solid;
+}
+

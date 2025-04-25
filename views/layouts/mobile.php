@@ -22,7 +22,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>" class="h-100">
+<html lang="<?= Yii::$app->language ?>" class="h-100" style="background: white;">
 <head>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -30,7 +30,9 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100"
+      style="background: #474747; border-radius: 20px 20px 0 0;"
+>
 <?php $this->beginBody() ?>
 
 <header id="header">
@@ -46,18 +48,19 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     </div>
 </main>
 
-<footer id="footer" class="mt-auto py-3 bg-light">
+<!--<footer id="footer" class="mt-auto py-3 bg-light">-->
 <!--    <div class="container">-->
 <!--        <div class="row text-muted">-->
 <!--            <div class="col-md-6 text-center text-md-start">&copy; Ivan Zavadsky --><?php //= date('Y') ?><!--</div>-->
 <!--            <div class="col-md-6 text-center text-md-end">--><?php //= Yii::powered() ?><!--</div>-->
 <!--        </div>-->
 <!--    </div>-->
-</footer>
+<!--</footer>-->
 
 <?php if(!Yii::$app->user->isGuest) {?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary"
-     style="position: fixed; bottom: 0; background: #d8d8d8; width: 100%;">
+     style="position: fixed; bottom: 0; background: #d8d8d8; width: 100%; border-radius: 0 0 20px 20px;"
+>
     <div class="container">
         <div class="row justify-content-md-center">
 <!--            <div class="col col-3">-->
@@ -77,13 +80,13 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                 <?= Html::endForm()?>
             </div>
             <div class="col col-3">
-                <a class="nav-link active" aria-current="page" href="/wish">
-                    <i class="bi bi-house" style="font-size: 1.8rem; color: #303030;"></i>
+                <a class="nav-link" href="/site/upload">
+                    <i class="bi bi-person" style="font-size: 1.8rem; color: #303030;"></i>
                 </a>
             </div>
             <div class="col col-3">
-                <a class="nav-link" href="/site/upload">
-                    <i class="bi bi-gear" style="font-size: 1.8rem; color: #303030;"></i>
+                <a class="nav-link active" aria-current="page" href="/wish">
+                    <i class="bi bi-house" style="font-size: 1.8rem; color: #303030;"></i>
                 </a>
             </div>
             <div class="col col-3">

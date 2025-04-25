@@ -22,12 +22,32 @@ use yii\web\View;
     </div>
 </div>
 
-<div class="d-flex justify-content-center">
-    <div class="cards row">
+<div class="container" style="height: 100px;">
+    <div class="cards row" style="height: 100%;">
     <?php
+    $evenWishes = '';
+    $oddWishes = '';
         foreach ($wishes as $i => $wish) {
-            echo $this->render('_card.php', ['i' => $i, 'wish' => $wish]);
+            $even = $i % 2 == 0;
+            if (!$even) {
+                $evenWishes .= $this->render('_card.php', ['i' => $i, 'wish' => $wish]);
+            } else {
+                $oddWishes .= $this->render('_card.php', ['i' => $i, 'wish' => $wish]);
+            }
         }
+
+//    echo '<pre>';
+//    print_r($evenWishes);
+//    echo '</pre>';
+//    die;
+
     ?>
+        <div class="col">
+            <?= $oddWishes ?>
+        </div>
+        <div class="col">
+            <?= $evenWishes ?>
+        </div>
+
     </div>
 </div>
